@@ -18,6 +18,8 @@ public class GlobalExceptionHandler {
     ResponseEntity<ApiResponseDto> handlingException(RuntimeException exception){
         ApiResponseDto apiResponseDto = new ApiResponseDto();
 
+        System.out.println(exception);
+
         apiResponseDto.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
         apiResponseDto.setMessage(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
 
