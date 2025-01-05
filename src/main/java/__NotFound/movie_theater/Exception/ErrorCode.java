@@ -17,19 +17,19 @@ public enum ErrorCode {
     INVALID_PASSWORD(1008, "Password is invalid", HttpStatus.BAD_REQUEST),
     UNAUTHENTICATED(2000, "Unauthenticated", HttpStatus.UNAUTHORIZED),
 
-    NOT_NULL_NAME(3000, "Movie name must not be null", HttpStatus.BAD_REQUEST),
-    NOT_EMPTY_NAME(3001, "Movie name must not be empty", HttpStatus.BAD_REQUEST),
-    NOT_NULL_DESCRIPTION(3002, "Description must not be null", HttpStatus.BAD_REQUEST),
-    NOT_EMPTY_DESCRIPTION(3003, "Description must not be empty", HttpStatus.BAD_REQUEST),
-    POSITIVE_AGE_LIMIT(3004, "Age limit must be a positive number", HttpStatus.BAD_REQUEST),
-    NOT_NULL_NATION(3005, "Nation must not be null", HttpStatus.BAD_REQUEST),
-    NOT_EMPTY_NATION(3006, "Nation must not be empty", HttpStatus.BAD_REQUEST),
-    NOT_NULL_DURATION(3007, "Duration must not be null", HttpStatus.BAD_REQUEST),
-    POSITIVE_DURATION(3008, "Duration must be a positive number", HttpStatus.BAD_REQUEST),
-    NOT_NULL_RELEASE_DATE(3009, "Release date must not be null", HttpStatus.BAD_REQUEST),
-    INVALID_RELEASE_DATE(3010, "Release date must be after today", HttpStatus.BAD_REQUEST),
-    EXIST_FILM(3011, "Name must be exist", HttpStatus.BAD_REQUEST),
-    NOT_EXIST_FILM(3012, "Film not exist", HttpStatus.BAD_REQUEST);
+    FILM_NULL_NAME(3000, "Movie name must not be null", HttpStatus.BAD_REQUEST),
+    FILM_EMPTY_NAME(3001, "Movie name must not be empty", HttpStatus.BAD_REQUEST),
+    FILM_NULL_DESCRIPTION(3002, "Description must not be null", HttpStatus.BAD_REQUEST),
+    FILM_EMPTY_DESCRIPTION(3003, "Description must not be empty", HttpStatus.BAD_REQUEST),
+    FILM_POSITIVE_AGE_LIMIT(3004, "Age limit must be a positive number", HttpStatus.BAD_REQUEST),
+    FILM_NULL_NATION(3005, "Nation must not be null", HttpStatus.BAD_REQUEST),
+    FILM_EMPTY_NATION(3006, "Nation must not be empty", HttpStatus.BAD_REQUEST),
+    FILM_NULL_DURATION(3007, "Duration must not be null", HttpStatus.BAD_REQUEST),
+    FILM_POSITIVE_DURATION(3008, "Duration must be a positive number", HttpStatus.BAD_REQUEST),
+    FILM_NULL_RELEASE_DATE(3009, "Release date must not be null", HttpStatus.BAD_REQUEST),
+    FILM_INVALID_RELEASE_DATE(3010, "Release date must be after today", HttpStatus.BAD_REQUEST),
+    FILM_EXIST_NAME(3011, "Name must be exist", HttpStatus.BAD_REQUEST),
+    FILM_NOT_EXISTED(3012, "Film not exist", HttpStatus.BAD_REQUEST);
 
     private int code;
     private String message;

@@ -29,7 +29,7 @@ public class FilmService {
 
     public FilmResponse createFilm(FilmCreationDto filmCreationDto) {
         if (filmRepository.existsByName(filmCreationDto.getName()))
-            throw new AppException(ErrorCode.EXIST_FILM);
+            throw new AppException(ErrorCode.FILM_EXIST_NAME);
 
         Film film = filmMapper.toFilm(filmCreationDto);
 
@@ -38,7 +38,7 @@ public class FilmService {
 
     public FilmResponse findById(String filmId) {
         return filmMapper.toFilmResponse(filmRepository.findById(filmId)
-                .orElseThrow(() -> new AppException(ErrorCode.NOT_EXIST_FILM)));
+                .orElseThrow(() -> new AppException(ErrorCode.FILM_NOT_EXISTED)));
     }
 
     public List<FilmResponse> findAll() {
@@ -62,12 +62,12 @@ public class FilmService {
 
     public FilmResponse updateFilm(String filmId, FilmUpdateDto filmUpdateDto) {
         Film existingFilm = filmRepository.findById(filmId)
-                .orElseThrow(() -> new AppException(ErrorCode.NOT_EXIST_FILM));
+                .orElseThrow(() -> new AppException(ErrorCode.FILM_NOT_EXISTED));
 
         // Check duplicate name, excluding the current film
         if (filmUpdateDto.getName() != null
                 && filmRepository.existsByNameAndIdNot(filmUpdateDto.getName(), existingFilm.getId())) {
-            throw new AppException(ErrorCode.EXIST_FILM);
+            throw new AppException(ErrorCode.FILM_EXIST_NAME);
         }
 
         // Update the film entity
@@ -79,7 +79,7 @@ public class FilmService {
 
     public void deleteById(String filmId) {
         if (!filmRepository.existsById(filmId))
-            throw new AppException(ErrorCode.NOT_EXIST_FILM);
+            throw new AppException(ErrorCode.FILM_NOT_EXISTED);
 
         filmRepository.deleteById(filmId);
     }
