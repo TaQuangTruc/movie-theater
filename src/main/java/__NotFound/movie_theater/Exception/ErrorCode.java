@@ -29,7 +29,14 @@ public enum ErrorCode {
     NOT_NULL_RELEASE_DATE(3009, "Release date must not be null", HttpStatus.BAD_REQUEST),
     INVALID_RELEASE_DATE(3010, "Release date must be after today", HttpStatus.BAD_REQUEST),
     EXIST_FILM(3011, "Name must be exist", HttpStatus.BAD_REQUEST),
-    NOT_EXIST_FILM(3012, "Film not exist", HttpStatus.BAD_REQUEST);
+    NOT_EXIST_FILM(3012, "Film not exist", HttpStatus.BAD_REQUEST),
+
+    GENRE_NAME_EXIST(4000, "Name must exist", HttpStatus.BAD_REQUEST),
+    GENRE_NOT_EXISTED(4001, "Genre not exist", HttpStatus.BAD_REQUEST),
+    GENRE_EMPTY_NAME(4002, "Name must not be empty", HttpStatus.BAD_REQUEST),
+    GENRE_NULL_NAME(4003, "Name must not be null", HttpStatus.BAD_REQUEST),
+    GENRE_NULL_DESC(4003, "Name must not be null", HttpStatus.BAD_REQUEST),
+    ;
 
     private int code;
     private String message;

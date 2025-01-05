@@ -2,21 +2,16 @@ package __NotFound.movie_theater.Controller;
 
 import __NotFound.movie_theater.Dto.Request.Film.FilmCreationDto;
 import __NotFound.movie_theater.Dto.Request.Film.FilmUpdateDto;
-import __NotFound.movie_theater.Dto.Request.User.UserCreationDto;
-import __NotFound.movie_theater.Dto.Request.User.UserUpdateDto;
 import __NotFound.movie_theater.Dto.Response.ApiResponseDto;
 import __NotFound.movie_theater.Dto.Response.FilmResponse;
 import __NotFound.movie_theater.Dto.Response.PageResponse;
-import __NotFound.movie_theater.Dto.Response.UserResponse;
 import __NotFound.movie_theater.Service.FilmService;
-import __NotFound.movie_theater.Service.UserService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("films")
@@ -26,13 +21,14 @@ public class FilmController {
     FilmService filmService;
 
     @PostMapping("")
-    ApiResponseDto<FilmResponse> createUser(@RequestBody @Valid FilmCreationDto filmCreationDto) {
+    ApiResponseDto<FilmResponse> createFilm(@RequestBody @Valid FilmCreationDto filmCreationDto) {
         return ApiResponseDto.<FilmResponse>builder()
                 .result(filmService.createFilm(filmCreationDto))
                 .build();
     }
 
 
+    @Transactional(readOnly = true)
     @GetMapping("")
     ApiResponseDto<PageResponse<FilmResponse>> pagination(
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
@@ -43,6 +39,7 @@ public class FilmController {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     @GetMapping("{filmId}")
     ApiResponseDto<FilmResponse> findById(@PathVariable("filmId") String filmId) {
         return ApiResponseDto.<FilmResponse>builder()
