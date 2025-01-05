@@ -6,6 +6,7 @@ import __NotFound.movie_theater.Dto.Request.User.UserCreationDto;
 import __NotFound.movie_theater.Dto.Request.User.UserUpdateDto;
 import __NotFound.movie_theater.Dto.Response.ApiResponseDto;
 import __NotFound.movie_theater.Dto.Response.FilmResponse;
+import __NotFound.movie_theater.Dto.Response.PageResponse;
 import __NotFound.movie_theater.Dto.Response.UserResponse;
 import __NotFound.movie_theater.Service.FilmService;
 import __NotFound.movie_theater.Service.UserService;
@@ -26,49 +27,42 @@ public class FilmController {
 
     @PostMapping("")
     ApiResponseDto<FilmResponse> createUser(@RequestBody @Valid FilmCreationDto filmCreationDto) {
-        ApiResponseDto<FilmResponse> apiResponseDto = new ApiResponseDto<>();
-
-        apiResponseDto.setResult(filmService.createFilm(filmCreationDto));
-
-        return apiResponseDto;
+        return ApiResponseDto.<FilmResponse>builder()
+                .result(filmService.createFilm(filmCreationDto))
+                .build();
     }
 
+
     @GetMapping("")
-    ApiResponseDto<List<FilmResponse>> findAll() {
-        ApiResponseDto<List<FilmResponse>> apiResponseDto = new ApiResponseDto<>();
-
-        apiResponseDto.setResult(filmService.findAll());
-
-        return apiResponseDto;
+    ApiResponseDto<PageResponse<FilmResponse>> pagination(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size
+    ) {
+        return ApiResponseDto.<PageResponse<FilmResponse>>builder()
+                .result(filmService.pagination(page, size))
+                .build();
     }
 
     @GetMapping("{filmId}")
     ApiResponseDto<FilmResponse> findById(@PathVariable("filmId") String filmId) {
-        ApiResponseDto<FilmResponse> apiResponseDto = new ApiResponseDto<>();
-
-        apiResponseDto.setResult(filmService.findById(filmId));
-
-        return apiResponseDto;
+        return ApiResponseDto.<FilmResponse>builder()
+                .result(filmService.findById(filmId))
+                .build();
     }
 
     @PutMapping("/{filmId}")
     ApiResponseDto<FilmResponse> updateFilm(@PathVariable("filmId") String filmId, @RequestBody @Valid FilmUpdateDto filmUpdateDto) {
-        ApiResponseDto<FilmResponse> apiResponseDto = new ApiResponseDto<>();
-
-        apiResponseDto.setResult(filmService.updateFilm(filmId, filmUpdateDto));
-
-        return apiResponseDto;
+        return ApiResponseDto.<FilmResponse>builder()
+                .result(filmService.updateFilm(filmId, filmUpdateDto))
+                .build();
     }
 
     @DeleteMapping("/{filmId}")
     ApiResponseDto<String> deleteUser(@PathVariable("filmId") String filmId) {
         filmService.deleteById(filmId);
 
-        ApiResponseDto<String> apiResponseDto = new ApiResponseDto<>();
-
-        apiResponseDto.setResult("Film has been deleted");
-
-        return apiResponseDto;
+        return ApiResponseDto.<String>builder()
+                .result("Film has been deleted")
+                .build();
     }
-
 }

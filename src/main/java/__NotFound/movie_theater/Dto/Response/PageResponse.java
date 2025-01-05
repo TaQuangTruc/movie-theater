@@ -1,0 +1,23 @@
+package __NotFound.movie_theater.Dto.Response;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class PageResponse<T> {
+    int currentPage;
+    int totalPages;
+    int pageSize;
+    long totalElements;
+
+    @Builder.Default
+    private List<T> data = Collections.emptyList();
+}

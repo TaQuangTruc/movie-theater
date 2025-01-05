@@ -3,6 +3,7 @@ package __NotFound.movie_theater.Service;
 import __NotFound.movie_theater.Dto.Request.Film.FilmCreationDto;
 import __NotFound.movie_theater.Dto.Request.Film.FilmUpdateDto;
 import __NotFound.movie_theater.Dto.Response.FilmResponse;
+import __NotFound.movie_theater.Dto.Response.PageResponse;
 import __NotFound.movie_theater.Exception.AppException;
 import __NotFound.movie_theater.Exception.ErrorCode;
 import __NotFound.movie_theater.Mapper.FilmMapper;
@@ -11,6 +12,9 @@ import lombok.AccessLevel;
 import __NotFound.movie_theater.Entity.Film;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +43,21 @@ public class FilmService {
 
     public List<FilmResponse> findAll() {
         return filmMapper.toListFilmResponse(filmRepository.findAll());
+    }
+
+    public PageResponse<FilmResponse> pagination(int page, int size) {
+        Sort sort = Sort.by(Sort.Order.asc("releaseDate"), Sort.Order.desc("name"));
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+
+        var pageData = filmRepository.findAll(pageable);
+
+        return PageResponse.<FilmResponse>builder()
+                .currentPage(page)
+                .pageSize(pageData.getSize())
+                .totalPages(pageData.getTotalPages())
+                .totalElements(pageData.getTotalElements())
+                .data(pageData.getContent().stream().map(filmMapper::toFilmResponse).toList())
+                .build();
     }
 
     public FilmResponse updateFilm(String filmId, FilmUpdateDto filmUpdateDto) {
