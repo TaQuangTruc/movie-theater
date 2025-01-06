@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -22,12 +24,18 @@ public class User {
     @Column(nullable = false)
     String password;
 
-    @Column(unique = true)
-    String name;
+    @Column(nullable = false)
+    String fisrtName;
+
+    @Column(nullable = false)
+    String lastName;
 
     @Column(unique = true, nullable = false)
     String email;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     String phoneNumber;
+
+    @Column(nullable = false)
+    LocalDate dob;
 }

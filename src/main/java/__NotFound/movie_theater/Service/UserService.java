@@ -33,8 +33,6 @@ public class UserService {
 
         User user = userMapper.toUser(userCreationDto);
 
-        System.out.println(userCreationDto);
-
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
 

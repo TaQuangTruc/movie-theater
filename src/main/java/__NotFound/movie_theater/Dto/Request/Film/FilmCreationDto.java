@@ -1,9 +1,6 @@
 package __NotFound.movie_theater.Dto.Request.Film;
 
-import __NotFound.movie_theater.Validation.EmailConstraint;
 import __NotFound.movie_theater.Validation.ReleaseDateConstraint;
-import jakarta.persistence.Column;
-import jakarta.persistence.Lob;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

@@ -1,12 +1,11 @@
 package __NotFound.movie_theater.Dto.Request.User;
 
-import __NotFound.movie_theater.Validation.EmailConstraint;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import __NotFound.movie_theater.Validation.DobConstraint;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -14,26 +13,31 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserCreationDto {
-    @NotNull(message = "INVALID_NAME")
-    @NotEmpty(message = "INVALID_NAME")
-    @Size(min = 8, message = "INVALID_NAME")
-    String name;
-
-
-    @NotNull(message = "INVALID_EMAIL")
-    @NotEmpty(message = "INVALID_EMAIL")
-    @EmailConstraint(end = "@hcmut.edu.vn", message = "INVALID_EMAIL")
-    String email;
-
-    @NotNull(message = "INVALID_PHONE_NUMBER")
-    @NotEmpty(message = "INVALID_PHONE_NUMBER")
-    String phoneNumber;
-
     @NotNull(message = "INVALID_USERNAME")
-    @NotEmpty(message = "INVALID_USERNAME")
+    @Size(min = 8, message = "USER_LENGTH_USERNAME")
     String username;
 
-    @NotNull(message = "INVALID_PASSWORD")
-    @NotEmpty(message = "INVALID_PASSWORD")
+    @NotNull(message = "USER_NULL_PASSWORD")
+    @Size(min = 8, message = "USER_LENGTH_PASSWORD")
     String password;
+
+    @NotNull(message = "USER_NULL_FIRSTNAME")
+    @NotEmpty(message = "USER_EMPTY_FIRSTNAME")
+    String firstName;
+
+    @NotNull(message = "USER_NULL_LASTNAME")
+    @NotEmpty(message = "USER_EMPTY_LASTNAME")
+    String lastName;
+
+    @NotNull(message = "USER_NULL_EMAIL")
+    @Email(message = "USER_INVALID_EMAIL")
+    String email;
+
+    @NotNull(message = "USER_NULL_PHONENUMBER")
+    @Pattern(regexp = "0\\d{9}", message = "USER_INVALID_PHONENUMBER")
+    String phoneNumber;
+
+    @NotNull(message = "USER_NULL_DOB")
+    @DobConstraint(min = 18, message = "USER_MIN_DOB")
+    LocalDate dob;
 }

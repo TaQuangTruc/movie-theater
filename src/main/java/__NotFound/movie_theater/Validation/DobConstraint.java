@@ -3,19 +3,22 @@ package __NotFound.movie_theater.Validation;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(
-        validatedBy = { EmailValidator.class }
+        validatedBy = {  }
 )
-public @interface EmailConstraint {
-    String message() default "INVALID_EMAIL";
+public @interface DobConstraint {
+    String message() default "Invalid day of birth";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
-    String end();
+    int min();
 }
