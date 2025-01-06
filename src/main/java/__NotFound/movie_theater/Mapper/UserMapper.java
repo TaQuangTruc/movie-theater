@@ -1,5 +1,6 @@
 package __NotFound.movie_theater.Mapper;
 
+import __NotFound.movie_theater.Config.CommonMapperConfig;
 import __NotFound.movie_theater.Dto.Request.User.UserCreationDto;
 import __NotFound.movie_theater.Dto.Request.User.UserUpdateDto;
 import __NotFound.movie_theater.Dto.Response.UserResponse;
@@ -9,7 +10,7 @@ import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(config = CommonMapperConfig.class)
 public interface UserMapper {
     User toUser(UserCreationDto userCreationDto);
     void updateUser(@MappingTarget User user, UserUpdateDto userUpdateDto);
