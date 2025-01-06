@@ -3,6 +3,8 @@ package __NotFound.movie_theater.Dto.Response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -15,4 +17,5 @@ public class UserResponse {
     String phoneNumber;
     String username;
     String password;
+    LocalDate dob;
 }
